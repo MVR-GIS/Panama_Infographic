@@ -1,0 +1,97 @@
+---
+title: "Data Wrangling"
+author: "ryan.benac"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+Libraries
+```{r}
+library(dplyr)
+```
+
+Open the Data
+```{r}
+df_sgr <- read.csv("C:\\Workspace\\LOCAL SANDBOX\\Panama\\DataSamplesForMVR\\DataSamplesForMVR\\Data Samples\\AGUA_CLARA_DB_LOCKAGES_SGR_VIEW_Export20221224.csv")
+df_micro <- read.csv("C:\\Workspace\\LOCAL SANDBOX\\Panama\\DataSamplesForMVR\\DataSamplesForMVR\\Data Samples\\AGUA_CLARA_DB_LOCKAGES_MICRO_VIEW_Export20221224.csv")
+```
+
+Exploratory Data Analysis
+```{r}
+summary(df_sgr)
+```
+```{r}
+paste("df_sgr number of columns:", length(colnames(df_sgr)))
+paste("df_sgr number of columns:", length(df_sgr$ACP_LOCKAGE_NUMBER))
+
+paste("df_micro number of columns:", length(colnames(df_micro)))
+paste("df_micro number of columns:", length(df_micro$ACP_LOCKAGE_NUMBER))
+```
+
+
+```{r}
+head(df_sgr)
+```
+
+```{r}
+names(df_sgr)
+```
+
+Summary Information about the data set
+```{r}
+paste("Total Records:", length(df_sgr$ACP_LOCKAGE_NUMBER))
+cat("\n")
+paste("Reading Date:", unique(df_sgr$LOCKAGE_DATE))
+cat("\n")
+paste("Total ships:",length(unique(df_sgr$VESSEL_NAME)))
+cat("\n")
+print("Salinity Summary:")
+summary(df_sgr$SALINITY_MEAS)
+cat("\n")
+print("Temperature Summary:")
+summary(df_sgr$TEMPERATURE_MEAS)
+cat("\n")
+print("Pressure Summary:")
+summary(df_sgr$PRESSURE_MEAS)
+cat("\n")
+paste("Earliest reading is at ", min(df_sgr$READING_DATE_TIME), " and the last reading is at ", max(df_sgr$READING_DATE_TIME), sep="")
+```
+
+```{r}
+unique(df_sgr$SALINITY_GAGE_NAME)
+unique(df_sgr$WSB_USED)
+unique(df_sgr$FLUSHING_USED)
+unique(df_sgr$DUAL_LOCKAGE)
+```
+
+Clean out some of the columns. First group are all columns that contain the date
+```{r}
+colnameDF <- colnames(df_sgr)
+
+# Select and remove all columns of no data
+df_sgr <- df_sgr %>%
+  select(-c(colnameDF[grepl("FCM_", colnameDF)])) %>%   # no data
+  select(-c(colnameDF[grepl("SCM_", colnameDF)])) %>%   # no data
+  select(-c(colnameDF[grepl("TCM_", colnameDF)])) %>%   # no data
+  select(-c(colnameDF[grepl("LCRWCCA_", colnameDF)])) %>%   # no data
+  select(-c(colnameDF[grepl("UCFWCCA_", colnameDF)])) %>%   # no data
+  select(-c(colnameDF[grepl("WSBWU_", colnameDF)])) %>%   # no data
+  select(-c(colnameDF[grepl("TAWU_", colnameDF)])) %>%   # no data
+  select(-c("COMMENTS2", "COMMENTS3", "STATION_LABEL", "READY_LOCKS_ARRPNT", "START_OPEN_RG_GTERDY", "FULL_OPEN_RG_FRSCHB1"))   # no data
+
+
+colnameDF <- colnames(df_sgr)
+```
+
+```{r}
+head(df_sgr)
+```
+
+```{r}
+write.table(df_sgr, "data\\df_sgr.csv")
+```
+
+```{r}
+
+```
+

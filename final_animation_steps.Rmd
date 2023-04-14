@@ -1,0 +1,190 @@
+---
+title: "Final Animation"
+author: "ryan.benac"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## Animating an SVG with Data
+
+# Install Packages
+```{r setup, eval=FALSE}
+remotes::install_github("coolbutuseless/minisvg") # Handles reading and modification of SVG
+remotes::install_github("coolbutuseless/minicss") # Handles formatting css
+install.packages("colorspace", repos = "http://R-Forge.R-project.org") # Handles color hughes
+```
+
+```{r}
+library(minisvg)
+library(minicss)
+library(colorspace)
+```
+
+# Functions
+```{r}
+# function to pull out shape id from the svg
+get_ids <- function(SVG_name) {
+  draw_group <- SVG_name$children[[5]]$children
+  
+  # create empty list
+  df <- data.frame(matrix(ncol = 0, nrow = length(draw_group)))
+  df$id <- ""
+  
+  # iterate then append values
+  for (i in 1:length(draw_group)) {
+    df[i,1] <- draw_group[[i]]$attribs$id
+  }
+  
+  return(df)
+}
+```
+
+Load in the SVG we created and create a df of the ids
+```{R}
+svg_total <- minisvg::parse_svg_doc("man/figures/total_lock_cross_section.svg")
+
+df_svg_id <- get_ids(svg_total)
+df_svg_id
+```
+
+
+We'll also need to read in the data.
+```{R}
+df_sgr <- read.table("C:\\Workspace\\GIT\\DATA\\Infographic\\df_sgr.csv")
+head(df_sgr)
+```
+
+
+```{R}
+unique(df_sgr$VESSEL_NAME)
+```
+
+We are only going to use 1 boat's data
+```{R}
+boat <- 'GUTHORM MAERSK'
+
+# subset to get only GUTHORM data
+single_boat <- df_sgr[df_sgr$VESSEL_NAME == boat,]
+
+# view new svg
+minisvg::knit_print.SVGDocument(svg_total)
+```
+
+Create a column to match the salinity to a predefined bin
+```{R}
+# max salinity option (this is also the number of bins)
+max_sal = 32
+
+colors <- colorspace::divergingx_hcl(n = max_sal, palette = 'RdYlBu')
+colors <- rev(colors)
+
+# create a new column for the instrument name that matches the assigned id
+single_boat$INS_NAME <- paste(sub(".*200-", "", single_boat$STATION_NAME), single_boat$SALINITY_GAGE_NAME, sep="_")
+single_boat$COLOR <- ""
+max_sal <- max_sal - 1
+
+# assign color column based on bins and diverging colors
+for(i in 0:max_sal) {
+  single_boat$COLOR[single_boat$SALINITY_MEAS >= i & single_boat$SALINITY_MEAS < i + 1] <- colors[i + 1]
+}
+```
+
+Exploratory investigation to see if any data is missing. Also creates color DF that matches bins to 
+```{R}
+# create df to compare and QA check
+color_df <- data.frame(colors)
+color_df$sal_min <- 0:max_sal
+color_df$sal_max <- 1:(max_sal + 1)
+values <- df_svg_id$id
+
+for (value in values) {
+  df_svg_id$count[df_svg_id$id == value] <- length(single_boat$INS_NAME[single_boat$INS_NAME == value])
+}
+
+# test to see if readings were taken at the same time. count the number of unique readings where instrument id in the options list
+print(length(unique(single_boat$READING_TIME)))
+
+df_unique_readings <- unique(data.frame(single_boat$READING_TIME))
+values <- df_unique_readings$single_boat.READING_TIME
+for (value in values) {
+  df_unique_readings$count[df_unique_readings$single_boat.READING_TIME == value] <- length(single_boat$INS_NAME[single_boat$READING_TIME == value])
+}
+
+```
+
+All animations
+```{R}
+instruments <- unique(single_boat$INS_NAME)
+
+# create a keyframe df
+df_keyframe <- data.frame(unique(single_boat$READING_TIME))
+df_keyframe <- data.frame(df_keyframe[order(df_keyframe$unique.single_boat.READING_TIME.),])
+df_keyframe$KEYFRAME_ID <- seq(from=1, to=100, length = nrow(df_keyframe))
+
+#rename column
+names(df_keyframe)[names(df_keyframe) == "df_keyframe.order.df_keyframe.unique.single_boat.READING_TIME...."] <- "READING_TIME"
+
+for (insIndex in 1:length(instruments)) {
+  instrument <- instruments[insIndex]
+  
+  cat('(', insIndex, '/', length(instruments), ') ')
+  cat('Starting:', instrument)
+  
+  # find sub selection of readings
+  insReadings <- single_boat[single_boat$INS_NAME == instrument,]
+  
+  # put them in order
+  insReadings <-insReadings[order(insReadings$READING_TIME),]
+  
+  cat('-')
+  
+  # create keyname declarations
+  key_name = paste('anim_', instrument, sep="")
+  my_frame <- minicss::Keyframes$new(name = key_name)
+  
+  for (rowIndex in 1:nrow(df_keyframe)) {
+    currentReading <- df_keyframe$READING_TIME[rowIndex]
+    
+    if (length(insReadings$READING_TIME[grepl(currentReading, insReadings$READING_TIME)]) == 1) {
+      colorVal <- insReadings$COLOR[insReadings$READING_TIME == currentReading]
+    } else {
+      colorVal <- '#000000'
+    }
+    
+    my_frame$add(time = paste(df_keyframe$KEYFRAME_ID[rowIndex], "%",sep = ""), fill = colorVal)
+  }
+  svg_total$add_css(as.character(my_frame))
+
+  cat('-')  
+  ################################################################################################## Define the animation
+  this_id <- instrument
+  anim_dur <- 60                     # animation duration in seconds
+  iter_count = 'infinite'
+  dir = 'normal'
+  # define the css animation
+  new_css <- Style$new(paste("#", this_id, sep=""))
+  # update with animation declaration
+  new_css$update(css_prop$animation(name = key_name, duration = anim_dur, iteration_count = iter_count, direction = dir))
+  # add that new css to the svg
+  svg_total$add_css(as.character(new_css))
+  
+  cat('-Complete')
+  cat('\n')
+}
+
+# assign the labels manually in css to add the !important declaration 
+svg_total$add_css(paste("#scale_low { fill: ", color_df[1,1] ,"!important;}", sep=""))
+
+svg_total$add_css(paste("#scale_mid { fill: ", color_df[16,1] ,"!important;}", sep=""))
+
+svg_total$add_css(paste("#scale_high { fill: ", color_df[32,1] ,"!important;}", sep=""))
+
+writeLines(as.character(svg_total), paste("man/figures/", boat, "_total_animated.svg", sep=""))
+```
+
+
+```{R}
+# view new svg
+minisvg::knit_print.SVGDocument(svg_total)
+
+```
