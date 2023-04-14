@@ -1,0 +1,410 @@
+---
+title: "Animating SVG with Data"
+author: "ryan.benac"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## Animating an SVG with Data
+
+# Install Packages
+```{r setup, eval=FALSE}
+remotes::install_github("coolbutuseless/minisvg") # Handles reading and modification of SVG
+remotes::install_github("coolbutuseless/minicss") # Handles formatting css
+install.packages("colorspace", repos = "http://R-Forge.R-project.org") # Handles color hughes
+```
+
+```{r}
+library(minisvg)
+library(minicss)
+library(colorspace)
+```
+
+# Loading the SVG
+First, we need to load the SVG with labels
+```{r}
+# function to pull out shape id from the svg
+get_ids <- function(SVG_name) {
+  draw_group <- SVG_name$children[[4]]$children
+  
+  # create empty list
+  df <- data.frame(matrix(ncol = 0, nrow = length(draw_group)))
+  df$id <- ""
+  
+  # iterate then append values
+  for (i in 1:length(draw_group)) {
+    df[i,1] <- draw_group[[i]]$attribs$id
+  }
+  
+  return(df)
+}
+
+svg_panama <- minisvg::parse_svg_doc("man/figures/panama_canal_descriptive_id.svg")
+
+df_svg_id <- get_ids(svg_panama)
+df_svg_id
+
+```
+
+# Create Test Data for Visualization
+```{r}
+# create empty data frame
+df_size <- 100
+sal_max <- 32
+sal_min <- 1
+
+df_dummyData <- data.frame(matrix(ncol = 0, nrow = df_size))
+
+# create time sequence with readings over 1 day
+df_dummyData$time <- seq(as.POSIXct("2023-3-1 0:00"), by="hour", length = df_size)
+
+# create data that builds up (1-100)
+df_dummyData$sal_buildUp <- seq(sal_min,sal_max, length=df_size)
+
+# create normally distributed data
+set.seed(1)
+df_dummyData$sal_norm <- rnorm(df_size, mean=sal_max/2, sd=5)
+
+# create randomly distributed data
+df_dummyData$sal_random <- runif(df_size, min=sal_min, max=sal_max)
+
+head(df_dummyData)
+```
+
+Make sure the data frame is sorted in order by time. This makes it easier to iterate through and animate in the correct order.
+```{r}
+# sort dummy data by time
+df_dummyData <- df_dummyData[order(df_dummyData$time),]
+
+# add key frame id to sorted df. This will be the key frame animation id from 1 to df_size
+
+df_dummyData$keyframe_id <- seq(from=1, to=100, length = df_size)
+head(df_dummyData)
+```
+
+# Applying Dummy Data to CSS
+Use the dummy data to create key frames. Iterate through the df (because we need to build the css line by line) and assign color based on value
+
+```{r} 
+##############################################   BUILD   #############################################################
+
+# reread svg to reset any previous animations
+svg_panama <- minisvg::parse_svg_doc("man/figures/panama_canal_descriptive_id.svg")
+
+# first step, then modify to add move
+key_name = "anim_svg_build"
+my_frame <- minicss::Keyframes$new(name = key_name)
+
+data_col <- "sal_buildUp"
+light_blue <- "#ADD8E6"
+dark_blue <- "#00008b"
+
+# iterate through df and assign animation
+for (row in 1:nrow(df_dummyData)) {
+  inst_value <- df_dummyData[row, data_col] # pull out instrument value at this time
+  darkness <- inst_value / sal_max
+  colorVal <- colorspace::darken(light_blue, darkness) # darken the color by instrument value
+  my_frame$add(time = paste(df_dummyData[row,"keyframe_id"], "%",sep = ""), # this will assign keyframe id (between 1-100) to the animation time
+               fill = colorVal)
+}
+
+
+##### add that keyframe declaration into the svg
+svg_panama$add_css(as.character(my_frame))
+
+print(svg_panama)
+```
+
+Next, we need to add an animation declaration for animating our svg object with the keyframe css.
+```{r}
+###### Add animation declaration
+this_id <- "comp3_rightRectangle"
+anim_dur <- 15                      # animation duration in seconds
+iter_count = 'infinite'
+dir = 'normal'
+
+# define the css animation
+new_css <- Style$new(paste("#", this_id, sep=""))
+
+# update with animation declaration
+new_css$update(css_prop$animation(name = key_name, duration = anim_dur, iteration_count = iter_count, direction = dir))
+
+# add that new css to the svg
+svg_panama$add_css(as.character(new_css))
+
+print(svg_panama)
+```
+
+Let's also build animations for the middle and left rectangles using the other sample data. This may need to be condensed into a function.
+```{r echo=FALSE}
+##############################################   NORMAL   #############################################################
+
+# first step, then modify to add move
+key_name = "anim_svg_normal"
+my_frame <- minicss::Keyframes$new(name = key_name)
+
+data_col <- "sal_norm"
+light_blue <- "#ADD8E6"
+dark_blue <- "#00008b"
+
+# iterate through df and assign animation
+for (row in 1:nrow(df_dummyData)) {
+  inst_value <- df_dummyData[row, data_col] # pull out instrument value at this time
+  darkness <- inst_value / sal_max
+  colorVal <- colorspace::darken(light_blue, darkness) # darken the color by instrument value
+  my_frame$add(time = paste(df_dummyData[row,"keyframe_id"], "%",sep = ""), # this will assign keyframe id (between 1-100) to the animation time
+               fill = colorVal)
+}
+
+##### add that keyframe declaration into the svg
+svg_panama$add_css(as.character(my_frame))
+
+###### Add animation declaration
+this_id <- "comp2_middleRectangle"
+anim_dur <- 15                      # animation duration in seconds
+iter_count = 'infinite'
+dir = 'normal'
+
+# define the css animation
+new_css <- Style$new(paste("#", this_id, sep=""))
+
+# update with animation declaration
+new_css$update(css_prop$animation(name = key_name, duration = anim_dur, iteration_count = iter_count, direction = dir))
+
+# add that new css to the svg
+svg_panama$add_css(as.character(new_css))
+
+##############################################   RANDOM   #############################################################
+# first step, then modify to add move
+key_name = "anim_svg_random"
+my_frame <- minicss::Keyframes$new(name = key_name)
+
+data_col <- "sal_random"
+light_blue <- "#ADD8E6"
+dark_blue <- "#00008b"
+
+# iterate through df and assign animation
+for (row in 1:nrow(df_dummyData)) {
+  inst_value <- df_dummyData[row, data_col] # pull out instrument value at this time
+  darkness <- inst_value / sal_max
+  colorVal <- colorspace::darken(light_blue, darkness) # darken the color by instrument value
+  my_frame$add(time = paste(df_dummyData[row,"keyframe_id"], "%",sep = ""), # this will assign keyframe id (between 1-100) to the animation time
+               fill = colorVal)
+}
+
+##### add that keyframe declaration into the svg
+svg_panama$add_css(as.character(my_frame))
+
+###### Add animation declaration
+this_id <- "comp1_leftRectangle"
+anim_dur <- 15                      # animation duration in seconds
+iter_count = 'infinite'
+dir = 'normal'
+
+# define the css animation
+new_css <- Style$new(paste("#", this_id, sep=""))
+
+# update with animation declaration
+new_css$update(css_prop$animation(name = key_name, duration = anim_dur, iteration_count = iter_count, direction = dir))
+
+# add that new css to the svg
+svg_panama$add_css(as.character(new_css))
+```
+
+This animates the image to that the rectangles are animated based on:
+1. The right rectangle is a build up, meaning at the beginning of time it has a low value and has an even sequence building to 32.
+2. The middle rectangle is normally distributed data.
+3. The left rectangle is randomly distributed between 1 and 32.
+
+A light blue signifies low values (low salinity) and as it gets darker, the value is increasing to 32 (high salinity). 
+
+# Change Text to Show Time Change
+```{r echo=FALSE}
+# first step, then modify to add move
+key_name = "anim_svg_text"
+my_frame <- minicss::Keyframes$new(name = key_name)
+
+data_col <- "time"
+
+# iterate through df and assign animation
+for (row in 1:nrow(df_dummyData)) {
+  inst_value <- paste('"', df_dummyData[row, data_col], '"', sep="") # pull out instrument value at this time
+  
+  my_frame$add(time = paste(df_dummyData[row,"keyframe_id"], "%",sep = ""), # this will assign keyframe id (between 1-100) to the animation time
+               content = inst_value)
+}
+
+##### add that keyframe declaration into the svg
+svg_panama$add_css(as.character(my_frame))
+
+###### Add animation declaration
+this_id <- "time_text"
+anim_dur <- 15                      # animation duration in seconds
+iter_count = 'infinite'
+#dir = 'normal'
+
+# define the css animation
+new_css <- Style$new(paste("#", this_id, sep=""))
+
+# update with animation declaration
+new_css$update(css_prop$animation(name = key_name, duration = anim_dur, iteration_count = iter_count, direction = dir))
+#new_css$update(css_prop$content(name = key_name, content = ""))
+
+
+# add that new css to the svg
+svg_panama$add_css(as.character(new_css))
+```
+
+# Save the SVG to view it
+```{r}
+# save to view
+writeLines(as.character(svg_panama), "man/figures/keyframe_panama_animated.svg")
+```
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Let's take it up a notch. We not have roughly cleaned clocking and instrumentation data. Let's import a cross section view of one lock, isolate the data from that time, and color code a keyframe definition to match changes in instrumentation readings over the locking time.
+
+I used Inkscape to create a 3x5 representation of instruments in a lock. There are 3 groupings of instruments each with 5 sensors at various depths. I gave each object box a name with as STATION_INSTRUMENT. For example, at station UC1 Instrument C, the naming convention is UC1_C. I downloaded this file as an SVG.
+```{R}
+# import as an svg_doc object
+svg_upper <- minisvg::parse_svg_doc("man/figures/upper_lock_cross_section.svg")
+
+df_upper_svgId <- get_ids(svg_upper)
+head(df_upper_svgId)
+```
+
+We'll also need to read in the data.
+```{R}
+df_sgr <- read.table("C:\\Workspace\\GIT\\DATA\\Infographic\\df_sgr.csv")
+head(df_sgr)
+```
+
+
+
+```{R}
+unique(df_sgr$VESSEL_NAME)
+max(gurthorm$SALINITY_MEAS)
+df_sgr <- read.table("C:\\Workspace\\GIT\\DATA\\Infographic\\df_sgr.csv")
+head(df_sgr)
+```
+
+```{R}
+unique(df_sgr$VESSEL_NAME)
+max(gurthorm$SALINITY_MEAS)
+unique(df_sgr$VESSEL_NAME)
+```
+
+
+```{R}
+# subset to get only gurthorm data
+gurthorm <- df_sgr[df_sgr$VESSEL_NAME == 'GUTHORM MAERSK',]
+max(gurthorm$SALINITY_MEAS)
+min(gurthorm$SALINITY_MEAS)
+
+# view new svg
+minisvg::knit_print.SVGDocument(svg_total)
+```
+
+
+```{R}
+# max salinity option (this is also the number of bins)
+max_sal = 32
+#colors <- colorspace::diverging_hcl(n = max_sal, palette = 'Blue-Red')
+colors <- colorspace::divergingx_hcl(n = max_sal, palette = 'RdYlBu')
+
+# create a new column for the instrument name that matches the assigned id
+gurthorm$INS_NAME <- paste(sub(".*200-", "", gurthorm$STATION_NAME), gurthorm$SALINITY_GAGE_NAME, sep="_")
+gurthorm$COLOR <- ""
+max_sal <- max_sal - 1
+
+# assign color column based on bins and diverging colors
+for(i in 0:max_sal) {
+  gurthorm$COLOR[gurthorm$SALINITY_MEAS >= i & gurthorm$SALINITY_MEAS < i + 1] <- colors[i + 1]
+}
+
+minisvg::knit_print.SVGDocument(svg_total)
+```
+
+
+```{R}
+# create df to compare and QA check
+color_df <- data.frame(colors)
+color_df$sal_min <- 0:max_sal
+color_df$sal_max <- 1:(max_sal + 1)
+values <- df_svgId$id
+for (value in values) {
+df_svgId$count[df_svgId$id == value] <- length(gurthorm$INS_NAME[gurthorm$INS_NAME == value])
+}
+# select only the rows with the same number of readings
+df_svgId_animate_options <- df_svgId[df_svgId$count == 2269,]
+# test to see if readings were taken at the same time. count the number of unique readings where instrument id in the options list
+print(length(unique(gurthorm$READING_TIME)))
+
+```
+
+
+```{R}
+values <- df_svgId$id
+for (value in values) {
+df_svgId$count[df_svgId$id == value] <- length(gurthorm$INS_NAME[gurthorm$INS_NAME == value])
+}
+# select only the rows with the same number of readings
+df_svgId_animate_options <- df_svgId[df_svgId$count == 2269,]
+# test to see if readings were taken at the same time. count the number of unique readings where instrument id in the options list
+print(length(unique(gurthorm$READING_TIME)))
+# count unique readings in the dataset
+df_unique_readings <- unique(data.frame(gurthorm$READING_TIME))
+values <- df_unique_readings$gurthorm.READING_TIME
+for (value in values) {
+  df_unique_readings$count[df_unique_readings$gurthorm.READING_TIME == value] <- length(gurthorm$INS_NAME[gurthorm$READING_TIME == value])
+}
+```
+
+
+```{R}
+print(length(unique(gurthorm$INS_NAME)))
+print(unique(gurthorm$INS_NAME))
+```
+
+```{R}
+# import as an svg_doc object
+svg_total <- minisvg::parse_svg_doc("man/figures/upper_lock_cross_section.svg")
+df_svgId <- get_ids(svg_total)
+head(df_svgId)
+View(df_svgId)
+```
+
+
+```{R}
+df_sgr <- read.table("C:\\Workspace\\GIT\\DATA\\Infographic\\df_sgr.csv")
+head(df_sgr)
+
+unique(df_sgr$VESSEL_NAME)
+# subset to get only gurthorm data
+gurthorm <- df_sgr[df_sgr$VESSEL_NAME == 'GUTHORM MAERSK',]
+max(gurthorm$SALINITY_MEAS)
+min(gurthorm$SALINITY_MEAS)
+```
+
+```{R}
+# view new svg
+minisvg::knit_print.SVGDocument(svg_total)
+```
+
+```{R}
+
+```
+
+```{R}
+
+```
+
+
+```{R}
+
+```
+

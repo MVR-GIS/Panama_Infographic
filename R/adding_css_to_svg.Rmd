@@ -1,0 +1,184 @@
+---
+title: "Assing CSS to SVG"
+author: "ryan.benac"
+date: "`r Sys.Date()`"
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+# Install Packages
+```{r setup, eval=FALSE}
+remotes::install_github("coolbutuseless/minisvg") # Handles reading and modification of SVG
+remotes::install_github("coolbutuseless/minicss") # Handles formatting css
+```
+
+```{r}
+library(minisvg)
+library(minicss)
+```
+
+## Import and View the SVG
+I removed the fill style from the right rectangle for testing.
+```{r}
+# Read the SVG as a minisvg SVG Document
+svg_panama <- minisvg::parse_svg_doc("man/figures/panama_canal.svg")
+minisvg::knit_print.SVGDocument(svg_panama)
+```
+
+# Add manually scripted CSS to right rectancle
+
+When creating CSS, be sure to use !important if the SVG or id within the SCG already contain a style definition.
+
+```{r}
+# Add manual CSS
+svg_panama$add_css("
+#comp3 {
+  fill: green !important;
+}")
+minisvg::knit_print.SVGDocument(svg_panama)
+
+# Adding !important overwrites any existing style for that shape (id)
+```
+
+```{r}
+# use an external style sheet
+svg_panama <- minisvg::parse_svg_doc("man/figures/panama_canal.svg")
+
+my_css <- "
+#comp3 {
+  fill: yellow !important;
+}"
+writeLines(my_css, "css/external.css")
+svg_panama$add_css_url("css/external.css")
+
+# save svg and reload
+writeLines(as.character(svg_panama), "man/figures/yellow_panama.svg")
+```
+
+Rmd will not show SVG with external CSS definition. Saving and opening "yellow_panama.svg" confirms that this chunk executed correctly.
+
+
+# Creating CSS with cssparser
+Create the CSS, append to add id selector with #, then append with the text version of 
+```{r}
+# create css by giving it our id (comp3) and the color to fill it with
+svg_panama <- minisvg::parse_svg_doc("man/figures/panama_canal.svg")
+
+this_id <- "comp3"
+color_def <- '#d60000'
+new_css <- Style$new(paste("#", this_id, sep=""), fill = color_def)
+
+
+# add that css to the svg
+svg_panama$add_css(as.character(new_css))
+minisvg::knit_print.SVGDocument(svg_panama)
+```
+
+# Adding animations with minicss
+```{r}
+svg_panama <- minisvg::parse_svg_doc("man/figures/panama_canal.svg")
+
+# first step, then modify to add move
+key_name = "color_change"
+my_frame <- minicss::Keyframes$new(name = key_name)
+
+my_frame$add(time = "0%", fill = 'blue')
+my_frame$add(time = "25%", fill = 'orange')
+my_frame$add(time = "50%", fill = 'yellow')
+my_frame$add(time = "75%", fill = 'green')
+my_frame$add(time = "100%", fill = 'blue')
+
+##### add that keyframe declaration into the svg
+# create stylesheet
+#stylesheet <- minicss::css_stylesheet()
+svg_panama$add_css(as.character(my_frame))
+
+print(svg_panama)
+```
+Let's add an animation declaration
+```{r}
+###### Add animation declaration
+this_id <- "comp3"
+anim_dur <- 2
+iter_count = 'infinite'
+dir = 'alternate'
+
+# define the css animation
+this_id <- "comp3"
+new_css <- Style$new(paste("#", this_id, sep=""))
+
+# update with animation declaration
+new_css$update(css_prop$animation(name = key_name, duration = anim_dur, iteration_count = iter_count, direction = dir))
+
+# add that new css to the svg
+svg_panama$add_css(as.character(new_css))
+
+#minisvg::knit_print.SVGDocument(svg_panama)
+print(svg_panama)
+
+# save to view
+writeLines(as.character(svg_panama), "man/figures/keyframe_panama.svg")
+```
+#Potential Issues
+1. When using prestyled CSS, this code may need to temporarily overwrite that css definition with an !important declaration. This may be helpful later depending on how the final SVG is formatted. See here for more info <https://www.w3docs.com/snippets/css/how-to-override-css-styles.html>.
+2. How will we pull out each id from the svg. Use a naming convention when making the id? That will make it easier to parse through and find what we want. We could then add a description in the id after a separator "_" and build a df in r with important id information.
+
+
+# Find and extract svg group id
+```{r}
+# reload fresh svg
+svg_panama <- minisvg::parse_svg_doc("man/figures/panama_canal.svg")
+
+# find children by index
+svg_panama$children
+```
+```{r}
+# isolate to the drawing definitions
+svg_panama$children[[4]]
+
+### note that this might be different depending on the SVG definition. Requires further testing
+```
+```{r}
+# pull only the id from that group
+draw_group <- svg_panama$children[[4]]
+draw_group <- draw_group$children
+for (i in 1:length(draw_group)) {
+  print(draw_group[[i]]$attribs$id)
+}
+```
+```{r}
+# add those id into a 
+# create empty list
+id_list <- vector(mode='list', length=length(draw_group))
+
+# iterate then append values
+for (i in 1:length(draw_group)) {
+  id_list[i] <- draw_group[[i]]$attribs$id
+}
+
+id_list
+```
+
+# Create a function that takes in svg doc and returns vector of shape id
+```{r}
+get_ids <- function(SVG_name) {
+  draw_group <- SVG_name$children[[4]]$children
+  
+  # create empty list
+  df <- data.frame(matrix(ncol = 0, nrow = length(draw_group)))
+  df$id <- ""
+  
+  # iterate then append values
+  for (i in 1:length(draw_group)) {
+    df[i,1] <- draw_group[[i]]$attribs$id
+  }
+  
+  return(df)
+}
+
+svg_panama_desc <- minisvg::parse_svg_doc("man/figures/panama_canal_descriptive_id.svg")
+
+ids_df <- get_ids(svg_panama_desc)
+ids_df
+```

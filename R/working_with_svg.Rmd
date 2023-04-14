@@ -1,0 +1,73 @@
+---
+title: "Working with SVG"
+output: html_document
+date: '2022-06-17'
+---
+
+```{r eval=FALSE}
+remotes::install_github('coolbutuseless/cssparser') # Handles CSS styling
+remotes::install_github('coolbutuseless/svgparser') # Handles 
+remotes::install_github('coolbutuseless/minisvg')
+```
+
+```{r}
+library(svgparser)
+library(minisvg)
+library(grid)
+```
+
+# Create test SVG
+
+```{r}
+svg <- minisvg::svg_doc(width = 100, height = 100)
+svg$rect(id = "rec1", x =  5, y =  5, width = 40, height = 40, opacity = 0.8)
+svg$rect(id = "rec2", x = 55, y =  5, width = 40, height = 40, opacity = 0.8, rx = "10%")
+svg$rect(id = "rec3", x =  5, y = 55, width = 40, height = 40, opacity = 0.8, rx = "20%")
+svg$rect(id = "rec4", x = 55, y = 55, width = 40, height = 40, opacity = 0.8, rx = "20%")
+```
+
+```{r}
+svg
+```
+
+```{r}
+g <- svgparser::read_svg(svg$as_character())
+grid.newpage()
+grid.draw(g)
+```
+
+```{r}
+path <- stag$path(id = "rec5", d = "m 70.945772,51.941237 -5.784284,4.02834 17.559434,11.878441 5.784283,-14.977164 -6.662255,-8.52149 -13.892612,-0.05165 z")
+svg$append(path)
+svg
+```
+
+```{r}
+g2 <- read_svg(svg$as_character())
+grid.newpage()
+grid.draw(g2)
+```
+
+
+```{r}
+g_df <- read_svg(svg$as_character(), obj_type = "data.frame")
+```
+
+
+# Import SVG from Inkscape
+
+```{r}
+pc <- read_svg("panama_canal.svg")
+pc_df <- read_svg("panama_canal.svg", obj_type = "data.frame")
+pc_ls <- read_svg("panama_canal.svg", obj_type = "list")
+```
+
+```{r}
+grid.newpage()
+grid.draw(pc)
+```
+
+```{r}
+
+```
+

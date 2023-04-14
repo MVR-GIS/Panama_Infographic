@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="7.4812503in" height="2.825in" viewBox="0 0 190.02376 71.755005" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svg8" version="1.0 (4035a4fb49, 2020-05-01)" docname="panama_canal.svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+<style type='text/css'>
+<![CDATA[
+@keyframes anim_svg_build {
+    1% { fill: #B6CED6; }
+    2% { fill: #B2CCD5; }
+    3% { fill: #AFCAD3; }
+    4% { fill: #ACC8D1; }
+    5% { fill: #A9C5CF; }
+    6% { fill: #A6C3CD; }
+    7% { fill: #A3C1CC; }
+    8% { fill: #9FBFCA; }
+    9% { fill: #9CBDC8; }
+    10% { fill: #99BBC6; }
+    11% { fill: #96B9C5; }
+    12% { fill: #92B7C3; }
+    13% { fill: #8FB5C1; }
+    14% { fill: #8CB3BF; }
+    15% { fill: #88B1BE; }
+    16% { fill: #85AFBC; }
+    17% { fill: #81ADBA; }
+    18% { fill: #7EABB9; }
+    19% { fill: #7AA9B7; }
+    20% { fill: #77A7B5; }
+    21% { fill: #73A5B4; }
+    22% { fill: #6FA3B2; }
+    23% { fill: #6BA1B1; }
+    24% { fill: #679FAF; }
+    25% { fill: #639DAD; }
+    26% { fill: #5F9BAC; }
+    27% { fill: #5B99AA; }
+    28% { fill: #5797A9; }
+    29% { fill: #5295A7; }
+    30% { fill: #4E93A5; }
+    31% { fill: #4992A4; }
+    32% { fill: #4390A2; }
+    33% { fill: #3E8EA1; }
+    34% { fill: #388C9F; }
+    35% { fill: #318A9E; }
+    36% { fill: #2D889C; }
+    37% { fill: #2A869A; }
+    38% { fill: #278497; }
+    39% { fill: #258295; }
+    40% { fill: #228093; }
+    41% { fill: #1F7D91; }
+    42% { fill: #1B7B8E; }
+    43% { fill: #18798C; }
+    44% { fill: #14778A; }
+    45% { fill: #107588; }
+    46% { fill: #0B7386; }
+    47% { fill: #057183; }
+    48% { fill: #046F81; }
+    49% { fill: #076C7E; }
+    50% { fill: #006B7C; }
+    51% { fill: #02687A; }
+    52% { fill: #056677; }
+    53% { fill: #076474; }
+    54% { fill: #006272; }
+    55% { fill: #026070; }
+    56% { fill: #055E6D; }
+    57% { fill: #075B6A; }
+    58% { fill: #005969; }
+    59% { fill: #025766; }
+    60% { fill: #055563; }
+    61% { fill: #075361; }
+    62% { fill: #00515F; }
+    63% { fill: #034F5C; }
+    64% { fill: #054D5A; }
+    65% { fill: #004B58; }
+    66% { fill: #014956; }
+    67% { fill: #034753; }
+    68% { fill: #044551; }
+    69% { fill: #00434F; }
+    70% { fill: #01414C; }
+    71% { fill: #033F4A; }
+    72% { fill: #043D47; }
+    73% { fill: #003B46; }
+    74% { fill: #013943; }
+    75% { fill: #033741; }
+    76% { fill: #04353E; }
+    77% { fill: #00333D; }
+    78% { fill: #01313A; }
+    79% { fill: #032F38; }
+    80% { fill: #002E36; }
+    81% { fill: #002C34; }
+    82% { fill: #012A32; }
+    83% { fill: #03282F; }
+    84% { fill: #00262E; }
+    85% { fill: #00242C; }
+    86% { fill: #022229; }
+    87% { fill: #032027; }
+    88% { fill: #001F26; }
+    89% { fill: #011D23; }
+    90% { fill: #021B21; }
+    91% { fill: #03191E; }
+    92% { fill: #00181D; }
+    93% { fill: #01151B; }
+    94% { fill: #021318; }
+    95% { fill: #001116; }
+    96% { fill: #000E12; }
+    97% { fill: #010B0E; }
+    98% { fill: #020709; }
+    99% { fill: #030303; }
+    100% { fill: #000000; }
+}
+#comp3_rightRectangle { animation: anim_svg_build 15s infinite; }
+@keyframes anim_svg_normal {
+    1% { fill: #258295; }
+    2% { fill: #066677; }
+    3% { fill: #2E899D; }
+    4% { fill: #003843; }
+    5% { fill: #096171; }
+    6% { fill: #2D899C; }
+    7% { fill: #005C6C; }
+    8% { fill: #005462; }
+    9% { fill: #005968; }
+    10% { fill: #14778A; }
+    11% { fill: #003B46; }
+    12% { fill: #015F6F; }
+    13% { fill: #258295; }
+    14% { fill: #8DB4C0; }
+    15% { fill: #034753; }
+    16% { fill: #036E81; }
+    17% { fill: #006D80; }
+    18% { fill: #054D5A; }
+    19% { fill: #00515F; }
+    20% { fill: #075867; }
+    21% { fill: #004E5B; }
+    22% { fill: #045260; }
+    23% { fill: #096A7B; }
+    24% { fill: #81ADBA; }
+    25% { fill: #045866; }
+    26% { fill: #046F81; }
+    27% { fill: #097285; }
+    28% { fill: #629CAD; }
+    29% { fill: #1E7D90; }
+    30% { fill: #085E6E; }
+    31% { fill: #053F4B; }
+    32% { fill: #047083; }
+    33% { fill: #016070; }
+    34% { fill: #046F81; }
+    35% { fill: #5C99AA; }
+    36% { fill: #1B7B8E; }
+    37% { fill: #197A8D; }
+    38% { fill: #056F81; }
+    39% { fill: #064854; }
+    40% { fill: #065361; }
+    41% { fill: #0A7285; }
+    42% { fill: #117588; }
+    43% { fill: #045563; }
+    44% { fill: #015A69; }
+    45% { fill: #288498; }
+    46% { fill: #288598; }
+    47% { fill: #046070; }
+    48% { fill: #065361; }
+    49% { fill: #057183; }
+    50% { fill: #034F5C; }
+    51% { fill: #005F6F; }
+    52% { fill: #248195; }
+    53% { fill: #076171; }
+    54% { fill: #4992A4; }
+    55% { fill: #003D48; }
+    56% { fill: #022C35; }
+    57% { fill: #18798C; }
+    58% { fill: #428FA2; }
+    59% { fill: #005969; }
+    60% { fill: #077184; }
+    61% { fill: #022026; }
+    62% { fill: #026E80; }
+    63% { fill: #055564; }
+    64% { fill: #046C7E; }
+    65% { fill: #2A869A; }
+    66% { fill: #056677; }
+    67% { fill: #76A7B5; }
+    68% { fill: #033C47; }
+    69% { fill: #006879; }
+    70% { fill: #01272E; }
+    71% { fill: #015D6C; }
+    72% { fill: #298598; }
+    73% { fill: #055867; }
+    74% { fill: #388C9F; }
+    75% { fill: #5396A7; }
+    76% { fill: #036373; }
+    77% { fill: #1C7C8F; }
+    78% { fill: #086D7E; }
+    79% { fill: #096A7B; }
+    80% { fill: #238194; }
+    81% { fill: #228093; }
+    82% { fill: #077184; }
+    83% { fill: #004552; }
+    84% { fill: #659EAE; }
+    85% { fill: #075867; }
+    86% { fill: #086171; }
+    87% { fill: #014956; }
+    88% { fill: #14778A; }
+    89% { fill: #036070; }
+    90% { fill: #066474; }
+    91% { fill: #217F92; }
+    92% { fill: #034450; }
+    93% { fill: #004652; }
+    94% { fill: #045563; }
+    95% { fill: #003843; }
+    96% { fill: #015A69; }
+    97% { fill: #5496A8; }
+    98% { fill: #228094; }
+    99% { fill: #5195A6; }
+    100% { fill: #1E7D90; }
+}
+#comp2_middleRectangle { animation: anim_svg_normal 15s infinite; }
+@keyframes anim_svg_random {
+    1% { fill: #5998A9; }
+    2% { fill: #6DA2B1; }
+    3% { fill: #036677; }
+    4% { fill: #5898A9; }
+    5% { fill: #7AA9B7; }
+    6% { fill: #026576; }
+    7% { fill: #005C6C; }
+    8% { fill: #8CB3C0; }
+    9% { fill: #5E9AAB; }
+    10% { fill: #043D47; }
+    11% { fill: #000E12; }
+    12% { fill: #96B9C5; }
+    13% { fill: #02343D; }
+    14% { fill: #001116; }
+    15% { fill: #012A32; }
+    16% { fill: #4691A3; }
+    17% { fill: #054A57; }
+    18% { fill: #021014; }
+    19% { fill: #021013; }
+    20% { fill: #338B9E; }
+    21% { fill: #5B99AA; }
+    22% { fill: #80ACBA; }
+    23% { fill: #3E8EA1; }
+    24% { fill: #096778; }
+    25% { fill: #02161B; }
+    26% { fill: #086778; }
+    27% { fill: #5D9AAB; }
+    28% { fill: #A7C4CE; }
+    29% { fill: #1A7B8E; }
+    30% { fill: #03232A; }
+    31% { fill: #2E899D; }
+    32% { fill: #8CB3BF; }
+    33% { fill: #278497; }
+    34% { fill: #004E5C; }
+    35% { fill: #238094; }
+    36% { fill: #05424E; }
+    37% { fill: #05424E; }
+    38% { fill: #055E6D; }
+    39% { fill: #16788B; }
+    40% { fill: #0C7386; }
+    41% { fill: #4791A3; }
+    42% { fill: #085967; }
+    43% { fill: #02191E; }
+    44% { fill: #88B1BE; }
+    45% { fill: #1B7B8E; }
+    46% { fill: #70A3B2; }
+    47% { fill: #16788B; }
+    48% { fill: #8BB3BF; }
+    49% { fill: #087284; }
+    50% { fill: #011217; }
+    51% { fill: #02343E; }
+    52% { fill: #00151A; }
+    53% { fill: #087082; }
+    54% { fill: #005462; }
+    55% { fill: #076C7E; }
+    56% { fill: #93B7C3; }
+    57% { fill: #619CAC; }
+    58% { fill: #076A7B; }
+    59% { fill: #288498; }
+    60% { fill: #00151A; }
+    61% { fill: #086475; }
+    62% { fill: #418FA2; }
+    63% { fill: #5496A8; }
+    64% { fill: #032F38; }
+    65% { fill: #05404B; }
+    66% { fill: #80ACBA; }
+    67% { fill: #A1C0CB; }
+    68% { fill: #003640; }
+    69% { fill: #06505D; }
+    70% { fill: #7FABB9; }
+    71% { fill: #A2C1CB; }
+    72% { fill: #93B7C3; }
+    73% { fill: #258296; }
+    74% { fill: #7FABB9; }
+    75% { fill: #4B92A5; }
+    76% { fill: #76A7B5; }
+    77% { fill: #5D9AAB; }
+    78% { fill: #7AA9B7; }
+    79% { fill: #026E80; }
+    80% { fill: #00333C; }
+    81% { fill: #ADC8D1; }
+    82% { fill: #066374; }
+    83% { fill: #001F25; }
+    84% { fill: #288498; }
+    85% { fill: #A7C4CE; }
+    86% { fill: #89B1BE; }
+    87% { fill: #3F8EA1; }
+    88% { fill: #84AEBC; }
+    89% { fill: #8BB3BF; }
+    90% { fill: #6CA1B1; }
+    91% { fill: #6AA0B0; }
+    92% { fill: #8CB3BF; }
+    93% { fill: #020608; }
+    94% { fill: #3C8DA0; }
+    95% { fill: #006879; }
+    96% { fill: #024450; }
+    97% { fill: #96B9C5; }
+    98% { fill: #90B5C2; }
+    99% { fill: #A6C3CD; }
+    100% { fill: #01151B; }
+}
+#comp1_leftRectangle { animation: anim_svg_random 15s infinite; }
+@keyframes anim_svg_text {
+    1% { content: "2023-03-01"; }
+    2% { content: "2023-03-01 01:00:00"; }
+    3% { content: "2023-03-01 02:00:00"; }
+    4% { content: "2023-03-01 03:00:00"; }
+    5% { content: "2023-03-01 04:00:00"; }
+    6% { content: "2023-03-01 05:00:00"; }
+    7% { content: "2023-03-01 06:00:00"; }
+    8% { content: "2023-03-01 07:00:00"; }
+    9% { content: "2023-03-01 08:00:00"; }
+    10% { content: "2023-03-01 09:00:00"; }
+    11% { content: "2023-03-01 10:00:00"; }
+    12% { content: "2023-03-01 11:00:00"; }
+    13% { content: "2023-03-01 12:00:00"; }
+    14% { content: "2023-03-01 13:00:00"; }
+    15% { content: "2023-03-01 14:00:00"; }
+    16% { content: "2023-03-01 15:00:00"; }
+    17% { content: "2023-03-01 16:00:00"; }
+    18% { content: "2023-03-01 17:00:00"; }
+    19% { content: "2023-03-01 18:00:00"; }
+    20% { content: "2023-03-01 19:00:00"; }
+    21% { content: "2023-03-01 20:00:00"; }
+    22% { content: "2023-03-01 21:00:00"; }
+    23% { content: "2023-03-01 22:00:00"; }
+    24% { content: "2023-03-01 23:00:00"; }
+    25% { content: "2023-03-02"; }
+    26% { content: "2023-03-02 01:00:00"; }
+    27% { content: "2023-03-02 02:00:00"; }
+    28% { content: "2023-03-02 03:00:00"; }
+    29% { content: "2023-03-02 04:00:00"; }
+    30% { content: "2023-03-02 05:00:00"; }
+    31% { content: "2023-03-02 06:00:00"; }
+    32% { content: "2023-03-02 07:00:00"; }
+    33% { content: "2023-03-02 08:00:00"; }
+    34% { content: "2023-03-02 09:00:00"; }
+    35% { content: "2023-03-02 10:00:00"; }
+    36% { content: "2023-03-02 11:00:00"; }
+    37% { content: "2023-03-02 12:00:00"; }
+    38% { content: "2023-03-02 13:00:00"; }
+    39% { content: "2023-03-02 14:00:00"; }
+    40% { content: "2023-03-02 15:00:00"; }
+    41% { content: "2023-03-02 16:00:00"; }
+    42% { content: "2023-03-02 17:00:00"; }
+    43% { content: "2023-03-02 18:00:00"; }
+    44% { content: "2023-03-02 19:00:00"; }
+    45% { content: "2023-03-02 20:00:00"; }
+    46% { content: "2023-03-02 21:00:00"; }
+    47% { content: "2023-03-02 22:00:00"; }
+    48% { content: "2023-03-02 23:00:00"; }
+    49% { content: "2023-03-03"; }
+    50% { content: "2023-03-03 01:00:00"; }
+    51% { content: "2023-03-03 02:00:00"; }
+    52% { content: "2023-03-03 03:00:00"; }
+    53% { content: "2023-03-03 04:00:00"; }
+    54% { content: "2023-03-03 05:00:00"; }
+    55% { content: "2023-03-03 06:00:00"; }
+    56% { content: "2023-03-03 07:00:00"; }
+    57% { content: "2023-03-03 08:00:00"; }
+    58% { content: "2023-03-03 09:00:00"; }
+    59% { content: "2023-03-03 10:00:00"; }
+    60% { content: "2023-03-03 11:00:00"; }
+    61% { content: "2023-03-03 12:00:00"; }
+    62% { content: "2023-03-03 13:00:00"; }
+    63% { content: "2023-03-03 14:00:00"; }
+    64% { content: "2023-03-03 15:00:00"; }
+    65% { content: "2023-03-03 16:00:00"; }
+    66% { content: "2023-03-03 17:00:00"; }
+    67% { content: "2023-03-03 18:00:00"; }
+    68% { content: "2023-03-03 19:00:00"; }
+    69% { content: "2023-03-03 20:00:00"; }
+    70% { content: "2023-03-03 21:00:00"; }
+    71% { content: "2023-03-03 22:00:00"; }
+    72% { content: "2023-03-03 23:00:00"; }
+    73% { content: "2023-03-04"; }
+    74% { content: "2023-03-04 01:00:00"; }
+    75% { content: "2023-03-04 02:00:00"; }
+    76% { content: "2023-03-04 03:00:00"; }
+    77% { content: "2023-03-04 04:00:00"; }
+    78% { content: "2023-03-04 05:00:00"; }
+    79% { content: "2023-03-04 06:00:00"; }
+    80% { content: "2023-03-04 07:00:00"; }
+    81% { content: "2023-03-04 08:00:00"; }
+    82% { content: "2023-03-04 09:00:00"; }
+    83% { content: "2023-03-04 10:00:00"; }
+    84% { content: "2023-03-04 11:00:00"; }
+    85% { content: "2023-03-04 12:00:00"; }
+    86% { content: "2023-03-04 13:00:00"; }
+    87% { content: "2023-03-04 14:00:00"; }
+    88% { content: "2023-03-04 15:00:00"; }
+    89% { content: "2023-03-04 16:00:00"; }
+    90% { content: "2023-03-04 17:00:00"; }
+    91% { content: "2023-03-04 18:00:00"; }
+    92% { content: "2023-03-04 19:00:00"; }
+    93% { content: "2023-03-04 20:00:00"; }
+    94% { content: "2023-03-04 21:00:00"; }
+    95% { content: "2023-03-04 22:00:00"; }
+    96% { content: "2023-03-04 23:00:00"; }
+    97% { content: "2023-03-05"; }
+    98% { content: "2023-03-05 01:00:00"; }
+    99% { content: "2023-03-05 02:00:00"; }
+    100% { content: "2023-03-05 03:00:00"; }
+}
+#time_text { animation: anim_svg_text 15s infinite; }
+]]>
+</style>
+  <defs id="defs2" />
+  <comment />
+  <metadata id="metadata5">
+    <RDF>
+      <Work about="">
+        <format>
+          image/svg+xml
+        </format>
+        <type resource="http://purl.org/dc/dcmitype/StillImage" />
+        <title />
+      </Work>
+    </RDF>
+  </metadata>
+  <g label="compartments" id="layer1" style="display:inline" groupmode="layer" transform="translate(-6.2857379,-4.9439272)">
+    <rect style="opacity:1;stroke-width:0.264583" id="comp3_rightRectangle" width="37.377186" height="4.388711" x="84.884979" y="33.939365" label="comp3_rightRectangle" />
+    <rect style="display:inline;fill:#0000ff;fill-rule:evenodd;stroke-width:0.283668" id="comp2_middleRectangle" width="33.313271" height="4.4412289" x="50.515965" y="34.77562" label="comp2_middleRectangle" />
+    <rect style="display:inline;opacity:1;fill:#0000ff;fill-rule:evenodd;stroke-width:0.264143" id="comp1_leftRectangle" width="32.921963" height="4.4730582" x="16.343866" y="36.816708" label="comp1_leftRectangle" />
+    <path label="comp4_middleWeirdShape" nodetypes="ccccccc" id="comp4_middleWeirdShape" d="m 70.945772,51.941237 -5.784284,4.02834 17.559434,11.878441 5.784283,-14.977164 -6.662255,-8.52149 -13.892612,-0.05165 z" style="fill:#0000ff;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text id="time_text" x="9" y="20"></text>
+  </g>
+</svg>
