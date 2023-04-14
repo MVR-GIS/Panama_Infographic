@@ -82,6 +82,8 @@ following list are items to still be completed
 
 5.  Create a better graphically designed layout
 
+6.  Add a boat that moves across the screen to signify locking time
+
 ## Guthorm Maersk
 
 The first visualization was ran only using data from lockage of the
