@@ -61,6 +61,24 @@ head(df_sgr)
 unique(df_sgr$VESSEL_NAME)
 ```
 
+Check out the temperature and pressure readings
+```{R}
+boats <- unique(df_sgr$VESSEL_NAME)
+
+for (boat in boats) {
+  subset <- df_sgr[df_sgr$VESSEL_NAME == boat,]
+
+  cat(boat, 'Temperature:', '\n')
+  cat('Max:', max(subset$TEMPERATURE_MEAS), unique(subset$TEMPERATURE_MEAS_UNIT), '\n')
+  cat('Min:', min(subset$TEMPERATURE_MEAS), unique(subset$TEMPERATURE_MEAS_UNIT), '\n\n')
+  
+  cat(boat, 'Pressure:', '\n')
+  cat('Max:', max(subset$PRESSURE_MEAS), unique(subset$PRESSURE_MEAS_UNIT), '\n')
+  cat('Min:', min(subset$PRESSURE_MEAS), unique(subset$PRESSURE_MEAS_UNIT), '\n\n')
+}
+
+```
+
 We are only going to use 1 boat's data
 ```{R}
 boat <- 'GUTHORM MAERSK'
