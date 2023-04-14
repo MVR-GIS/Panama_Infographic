@@ -37,10 +37,25 @@ The workflow to create a visualization given an SVG file is as follows:
 
 6. Those animation rules (written in CSS) were then injected into the SVG definition using the minicss package. The SVG can be opened and the visualization viewed in any web browser.
 
+# Visualizations
 
- # Final Image
- The first visualization was ran only using data from lockage of the Guthorm Maersk ship.
-![Panama Lock Cross Section](man/figures/GUTHORM MAERSK_total_animated.svg) 
 Blue represents a low salinity value and red is a high salinity value. Black represents no data present for the current time step. 
 
 The animation lasts 60 total seconds and all animations run concurrently. Each color represent a range of 1 salinity value, grouped 0-1, 1-2, 2-3, etc.
+
+## Guthorm Maersk
+The first visualization was ran only using data from lockage of the Guthorm Maersk ship.
+![Panama Lock Cross Section](man/figures/GUTHORM MAERSK_total_animated.svg) 
+
+## Diamond Gas Rose
+
+
+## CMA CGM Aquila
+
+
+## Ever Lotus
+
+
+## CMA CGM Nabucco
+
+

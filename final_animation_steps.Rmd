@@ -188,3 +188,14 @@ writeLines(as.character(svg_total), paste("man/figures/", boat, "_total_animated
 minisvg::knit_print.SVGDocument(svg_total)
 
 ```
+
+
+Create a function that will run through each ship and create images.
+```{R}
+boats <- unique(df_sgr$VESSEL_NAME)
+
+for (boat in boats) {
+  
+}
+
+```
