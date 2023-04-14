@@ -66,16 +66,43 @@ The animation lasts 60 total seconds and all animations run
 concurrently. Each color represent a range of 1 salinity value, grouped
 0-1, 1-2, 2-3, etc.
 
+## Continued Work
+
+The visuals below are still under development and QA checks. The
+following list are items to still be completed
+
+1.  QA confirmation that animations happen in the correct order
+
+2.  Animate the TIME block to show the time readings are they are
+    animated
+
+3.  Fix the WSB2 (and others) flash between data and no data
+
+4.  Incorporate the temperature and pressure readings into the visual
+
+5.  Create a better graphically designed layout
+
 ## Guthorm Maersk
 
 The first visualization was ran only using data from lockage of the
 Guthorm Maersk ship. ![Panama Lock Cross
-Section](man/figures/GUTHORM%20MAERSK_total_animated.svg)
+Section](man/figures/GUTHORM%20MAERSK_total_new.svg)
 
 ## Diamond Gas Rose
 
+![Panama Lock Cross
+Section](man/figures/DIAMOND%20GAS%20ROSE_total_new.svg)
+
 ## CMA CGM Aquila
+
+![Panama Lock Cross
+Section](man/figures/CMA%20CGM%20AQUILA_total_new.svg)
 
 ## Ever Lotus
 
+![Panama Lock Cross Section](man/figures/EVER%20LOTUS_total_new.svg)
+
 ## CMA CGM Nabucco
+
+![Panama Lock Cross
+Section](man/figures/CMA%20CGM%20NABUCCO_total_new.svg)

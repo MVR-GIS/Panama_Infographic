@@ -26,9 +26,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.63650275"
-     inkscape:cx="586.80029"
-     inkscape:cy="437.54721"
+     inkscape:zoom="1.2730055"
+     inkscape:cx="694.81239"
+     inkscape:cy="385.30863"
      inkscape:window-width="2400"
      inkscape:window-height="1271"
      inkscape:window-x="4791"
@@ -713,34 +713,18 @@
          y="72.016594">LC1</tspan></text>
     <text
        space="preserve"
-       style="font-size:4.73897px;line-height:0;white-space:pre;inline-size:12.5516;display:inline;fill:#ffffff;stroke-width:1.0019"
-       x="69.050529"
-       y="47.326191"
-       id="UCLabel-7-6-5-5-7"
+       style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
+       x="236.34634"
+       y="71.859634"
+       id="UCLabel-7-6-5-3-1"
        highlight-color="#000000"
        label="UCLabel"
-       transform="matrix(0.94469015,0,0,0.975663,166.87953,26.864203)"
-       xml:space="preserve"><tspan
-         x="69.050529"
-         y="47.326191"
-         id="tspan669"><tspan
-           style="font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000"
-           id="tspan667">LC2</tspan></tspan></text>
-    <text
-       space="preserve"
-       style="font-size:4.73897px;line-height:0;white-space:pre;inline-size:12.5516;display:inline;fill:#ffffff;stroke-width:1.0019"
-       x="69.050529"
-       y="47.326191"
-       id="UCLabel-7-6-5-5-7-7"
-       highlight-color="#000000"
-       label="UCLabel"
-       transform="matrix(0.94469015,0,0,0.975663,179.37007,26.980509)"
-       xml:space="preserve"><tspan
-         x="69.050529"
-         y="47.326191"
-         id="tspan673"><tspan
-           style="font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000"
-           id="tspan671">LC2</tspan></tspan></text>
+       transform="scale(0.98399928,1.0162609)"><tspan
+         role="line"
+         id="tspan233-4-6-81-6-6-6"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.54966px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000;stroke-width:0.961876"
+         x="236.34634"
+         y="71.859634">LC2</tspan></text>
     <text
        space="preserve"
        style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
@@ -754,7 +738,21 @@
          id="tspan233-4-6-81-6-3-8"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.54966px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000;stroke-width:0.961876"
          x="268.65717"
-         y="72.260674">LC3</tspan></text>
+         y="72.260674">LC4</tspan></text>
+    <text
+       space="preserve"
+       style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
+       x="249.98685"
+       y="71.859642"
+       id="UCLabel-7-6-5-0-5-1"
+       highlight-color="#000000"
+       label="UCLabel"
+       transform="scale(0.98399928,1.0162609)"><tspan
+         role="line"
+         id="tspan233-4-6-81-6-3-8-0"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.54966px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000;stroke-width:0.961876"
+         x="249.98685"
+         y="71.859642">LC3</tspan></text>
     <rect
        style="fill:#000000;stroke-width:0.0797275"
        id="OC1_B"
@@ -1137,21 +1135,6 @@
          y="50.742073">UC1</tspan></text>
     <text
        space="preserve"
-       style="font-size:4.73897px;line-height:0;white-space:pre;inline-size:12.5516;fill:#ffffff;stroke-width:1.0019"
-       x="69.050529"
-       y="47.326191"
-       id="UCLabel-7-6-5-5"
-       highlight-color="#000000"
-       label="UCLabel"
-       transform="matrix(0.94469015,0,0,0.975663,8.8222467,5.0792552)"
-       xml:space="preserve"><tspan
-         x="69.050529"
-         y="47.326191"
-         id="tspan677"><tspan
-           style="font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000"
-           id="tspan675">UC2</tspan></tspan></text>
-    <text
-       space="preserve"
        style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
        x="100.9088"
        y="50.986149"
@@ -1167,6 +1150,28 @@
     <text
        space="preserve"
        style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
+       x="75.509468"
+       y="50.997913"
+       id="UCLabel-7-6-5-0-55"
+       highlight-color="#000000"
+       label="UCLabel"
+       transform="scale(0.98399928,1.0162609)"><tspan
+         sodipodi:role="line"
+         id="tspan1216"
+         x="75.509468"
+         y="50.997913"><tspan
+           role="line"
+           id="tspan233-4-6-81-6-3-26"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.54966px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000;stroke-width:0.961876"
+           x="75.509468"
+           y="50.997913">UC2</tspan></tspan><tspan
+         sodipodi:role="line"
+         id="tspan1218"
+         x="75.509468"
+         y="51.110332" /></text>
+    <text
+       space="preserve"
+       style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
        x="133.00296"
        y="59.030849"
        id="UCLabel-7-6-5-8"
@@ -1178,21 +1183,6 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.54966px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000;stroke-width:0.961876"
          x="133.00296"
          y="59.030849">MC1</tspan></text>
-    <text
-       space="preserve"
-       style="font-size:4.73897px;line-height:0;white-space:pre;inline-size:12.5516;fill:#ffffff;stroke-width:1.0019"
-       x="69.050529"
-       y="47.326191"
-       id="UCLabel-7-6-5-5-4"
-       highlight-color="#000000"
-       label="UCLabel"
-       transform="matrix(0.94469015,0,0,0.975663,91.074734,13.502815)"
-       xml:space="preserve"><tspan
-         x="69.050529"
-         y="47.326191"
-         id="tspan681"><tspan
-           style="font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000"
-           id="tspan679">MC2</tspan></tspan></text>
     <text
        space="preserve"
        style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
@@ -1210,6 +1200,20 @@
     <text
        space="preserve"
        style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
+       x="158.95885"
+       y="58.975143"
+       id="UCLabel-7-6-5-0-1-0"
+       highlight-color="#000000"
+       label="UCLabel"
+       transform="scale(0.98399928,1.0162609)"><tspan
+         role="line"
+         id="tspan233-4-6-81-6-3-2-2"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.54966px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000;stroke-width:0.961876"
+         x="158.95885"
+         y="58.975143">MC2</tspan></text>
+    <text
+       space="preserve"
+       style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
        x="302.76074"
        y="72.292885"
        id="UCLabel-7-6-5-4"
@@ -1221,21 +1225,6 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.54966px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000;stroke-width:0.961876"
          x="302.76074"
          y="72.292885">OC1</tspan></text>
-    <text
-       space="preserve"
-       style="font-size:4.73897px;line-height:0;white-space:pre;inline-size:12.5516;display:inline;fill:#ffffff;stroke-width:1.0019"
-       x="69.050529"
-       y="47.326191"
-       id="UCLabel-7-6-5-5-3"
-       highlight-color="#000000"
-       label="UCLabel"
-       transform="matrix(0.94469015,0,0,0.975663,258.11631,26.980509)"
-       xml:space="preserve"><tspan
-         x="69.050529"
-         y="47.326191"
-         id="tspan685"><tspan
-           style="font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000"
-           id="tspan683">OC2</tspan></tspan></text>
     <text
        space="preserve"
        style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
@@ -1250,6 +1239,20 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.54966px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000;stroke-width:0.961876"
          x="354.25659"
          y="72.536964">OC3</tspan></text>
+    <text
+       space="preserve"
+       style="font-size:4.54966px;line-height:0;fill:#ffffff;stroke-width:0.961876"
+       x="329.75198"
+       y="72.064156"
+       id="UCLabel-7-6-5-0-4-1"
+       highlight-color="#000000"
+       label="UCLabel"
+       transform="scale(0.98399928,1.0162609)"><tspan
+         role="line"
+         id="tspan233-4-6-81-6-3-6-0"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.54966px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#000000;stroke-width:0.961876"
+         x="329.75198"
+         y="72.064156">OC2</tspan></text>
     <text
        space="preserve"
        style="font-size:5.83065px;line-height:0;fill:#ffffff;stroke-width:1.23271"
