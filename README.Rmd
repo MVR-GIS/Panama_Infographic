@@ -25,7 +25,7 @@ The supplied data set is for one day of lockages (5 boats). That file alone cont
 
 The workflow to create a visualization given an SVG file is as follows:
 
-1. Data (salinity, temperature, salinity) is be supplied from all sensors at the lock. The data includes salinity readings.
+1. Data (salinity, temperature, salinity) is be supplied from all sensors at the lock.
 
 2. The SVG blocked cross section view of instruments was created using InkScape software. Each instrument block was assigned an instrument name to align with the name in the data set. For example, instrument C at station MC1 is assigned the INS_VALUE MC1_C for both the data set and the SVG shape id.
 
@@ -37,7 +37,7 @@ The workflow to create a visualization given an SVG file is as follows:
 
 6. Those animation rules (written in CSS) were then injected into the SVG definition using the minicss package. The SVG can be opened and the visualization viewed in any web browser.
 
-# Visualizations
+# Salinity Visualizations
 
 Blue represents a low salinity value and red is a high salinity value. Black represents no data present for the current time step. 
 
@@ -52,25 +52,22 @@ The visuals below are still under development and QA checks. The following list 
 
 3. Fix the WSB2 (and others) flash between data and no data
 
-4. Incorporate the temperature and pressure readings into the visual
+4. Incorporate the temperature and pressure readings into the visual -- possibly their own color coded visuals
 
 5. Create a better graphically designed layout
 
-6. Add a boat that moves across the screen to signify locking time
-
-## Guthorm Maersk
-The first visualization was ran only using data from lockage of the Guthorm Maersk ship.
+## Guthorm Maersk (Salinity)
 ![Panama Lock Cross Section](man/figures/GUTHORM MAERSK_total_new.svg) 
 
-## Diamond Gas Rose
+## Diamond Gas Rose (Salinity)
 ![Panama Lock Cross Section](man/figures/DIAMOND GAS ROSE_total_new.svg) 
 
-## CMA CGM Aquila
+## CMA CGM Aquila (Salinity)
 ![Panama Lock Cross Section](man/figures/CMA CGM AQUILA_total_new.svg) 
 
-## Ever Lotus
+## Ever Lotus (Salinity)
 ![Panama Lock Cross Section](man/figures/EVER LOTUS_total_new.svg) 
 
-## CMA CGM Nabucco
+## CMA CGM Nabucco (Salinity)
 ![Panama Lock Cross Section](man/figures/CMA CGM NABUCCO_total_new.svg) 
 

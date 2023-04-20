@@ -86,8 +86,6 @@ boat <- 'GUTHORM MAERSK'
 # subset to get only GUTHORM data
 single_boat <- df_sgr[df_sgr$VESSEL_NAME == boat,]
 
-# view new svg
-minisvg::knit_print.SVGDocument(svg_total)
 ```
 
 Create a column to match the salinity to a predefined bin
@@ -132,6 +130,61 @@ for (value in values) {
 
 ```
 
+Create boat movement chart
+
+Easiest way to ensure that the boat moves equally in relation to the data set is to create a separate dataset to read through and animate based on. All instruments should have 2269 readings, so we can isolate unique readings and location from that instrument and do the x translation math based on that
+```{R}
+boat <- 'GUTHORM MAERSK'
+
+# subset to get only GUTHORM data
+single_boat <- df_sgr[df_sgr$VESSEL_NAME == boat,]
+
+locations <- data.frame(unique(single_boat$CURRENT_VESSEL_LOCATION))
+
+# x location of each lockage location estimated from inkscape. Could also theoretically be pulled off of a shape id
+locations$X_END <- c(20,77,117,161,201,243,360)
+
+
+single_ins <- single_boat[single_boat$STATION_NAME == 'U-ACAT200-LK1' & single_boat$SALINITY_GAGE_NAME == 'A',]
+df_boat_move <- data.frame(unique(single_ins$READING_TIME))
+
+# rename column
+names(df_boat_move)[names(df_boat_move) == "unique.single_ins.READING_TIME."] <- "READING_TIME"
+
+# add location in lockage
+df_boat_move$CURRENT_VESSEL_LOCATION <- single_ins$CURRENT_VESSEL_LOCATION[single_ins$READING_TIME == df_boat_move$READING_TIME]
+
+# add same keyframe animations
+df_boat_move <- data.frame(df_boat_move[order(df_boat_move$READING_TIME),])
+row.names(df_boat_move) <- NULL
+df_boat_move$KEYFRAME_ID <- seq(from=1, to=100, length = nrow(df_boat_move))
+
+# read through and get x location
+df_boat_move$X_LOC <- ""
+
+# need to read through and assign different step values depending on where the boat is in the lock
+start <- 5
+indexStart <- 1
+
+for (locationIndex in 1:nrow(locations)) {
+  count <- length(df_boat_move$CURRENT_VESSEL_LOCATION[df_boat_move$CURRENT_VESSEL_LOCATION == locations$unique.single_boat.CURRENT_VESSEL_LOCATION.[locationIndex]])
+  current <- locations$unique.single_boat.CURRENT_VESSEL_LOCATION.[locationIndex]
+
+  indexEnd <- indexStart + count - 1
+  
+  # current end of X location
+  currentEnd <- locations$X_END[locationIndex]
+  
+  # assign group the sequence
+  df_boat_move$X_LOC[indexStart:indexEnd] <- seq(from=start, to=currentEnd, length = (indexEnd - indexStart + 1)) 
+  
+  indexStart <- indexEnd + 1
+  start <- currentEnd
+}
+```
+
+
+
 Animation for 1 boat
 ```{R}
 instruments <- unique(single_boat$INS_NAME)
@@ -155,7 +208,6 @@ for (insIndex in 1:length(instruments)) {
   
   # put them in order
   insReadings <-insReadings[order(insReadings$READING_TIME),]
-  
   cat('-')
   
   # create keyname declarations
@@ -212,9 +264,19 @@ minisvg::knit_print.SVGDocument(svg_total)
 
 Create a loop that will run through each ship and create images.
 ```{R}
+svg_total <- minisvg::parse_svg_doc("man/figures/total_lock_cross_section.svg")
+
 boats <- unique(df_sgr$VESSEL_NAME)
 
+anim_dur <- 60                     # animation duration in seconds
+iter_count = 'infinite'
+dir = 'normal'
+    
 for (boat in boats) {
+  cat('Initiallizing Script')
+  cat('\n\n')
+  #-----------------------------------------------------------------------------------------------------------------------------------#
+  # Instruments
   cat("Starting: ", boat)
   cat('\n')
   
@@ -306,19 +368,20 @@ for (boat in boats) {
     cat('-')  
     ################################################################################################## Define the animation
     this_id <- instrument
-    anim_dur <- 60                     # animation duration in seconds
-    iter_count = 'infinite'
-    dir = 'normal'
+
     # define the css animation
     new_css <- Style$new(paste("#", this_id, sep=""))
     # update with animation declaration
     new_css$update(css_prop$animation(name = key_name, duration = anim_dur, iteration_count = iter_count, direction = dir))
     # add that new css to the svg
     svg_total$add_css(as.character(new_css))
-    
+    cat('-')
     cat('-Complete')
     cat('\n')
   }
+  
+  #-----------------------------------------------------------------------------------------------------------------------------------#
+  # Labels
   
   # assign the labels manually in css to add the !important declaration 
   svg_total$add_css(paste("#scale_low { fill: ", color_df[1,1] ,"!important;}", sep=""))
@@ -327,10 +390,55 @@ for (boat in boats) {
   
   svg_total$add_css(paste("#scale_high { fill: ", color_df[32,1] ,"!important;}", sep=""))
   
+  
+  cat('-')
+  #-----------------------------------------------------------------------------------------------------------------------------------#
+  # Boat Animation
+  id <- 'boat'
+
+  # create keyname declarations
+    key_name = paste('anim_', id, sep="")
+    my_frame <- minicss::Keyframes$new(name = key_name)
+    
+    for (rowIndex in 1:nrow(df_boat_move)) {
+      dist <- df_boat_move$X_LOC[rowIndex]
+      keyFrame <- df_boat_move$KEYFRAME_ID[rowIndex]
+      
+      # add to keyframe
+      my_frame$add(time = paste(keyFrame, "%",sep = ""), transform = paste('translate(', dist, "px, 28px) scale(.04)",sep=""))
+    }
+    
+  svg_total$add_css(as.character(my_frame))
+  
+  # define the css animation
+  new_css <- Style$new(paste("#", id, sep=""))
+  # update with animation declaration
+  new_css$update(css_prop$animation(name = key_name, duration = anim_dur, iteration_count = iter_count, direction = dir))
+  # add that new css to the svg
+  svg_total$add_css(as.character(new_css))
+  
+  
+  cat('-')
+  #-----------------------------------------------------------------------------------------------------------------------------------#
+  # Temperature
+  
+  
+
+  cat('-')  
+  #-----------------------------------------------------------------------------------------------------------------------------------#
+  # Pressure
+  
+  
+  
+  # write image
+  cat('-')
   writeLines(as.character(svg_total), paste("man/figures/", boat, "_total_new.svg", sep=""))
   
-  cat(boat, 'file written. Moving to next boat')
+  
+  cat(boat, 'File written. Moving to next boat')
   cat('\n')
 }
 
+cat('\n\n')
+cat('Process has been completed. Script complete...')
 ```

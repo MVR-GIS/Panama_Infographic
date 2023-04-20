@@ -32,7 +32,7 @@ data was cleaned and supplied to us.
 The workflow to create a visualization given an SVG file is as follows:
 
 1.  Data (salinity, temperature, salinity) is be supplied from all
-    sensors at the lock. The data includes salinity readings.
+    sensors at the lock.
 
 2.  The SVG blocked cross section view of instruments was created using
     InkScape software. Each instrument block was assigned an instrument
@@ -57,7 +57,7 @@ The workflow to create a visualization given an SVG file is as follows:
     SVG definition using the minicss package. The SVG can be opened and
     the visualization viewed in any web browser.
 
-# Visualizations
+# Salinity Visualizations
 
 Blue represents a low salinity value and red is a high salinity value.
 Black represents no data present for the current time step.
@@ -78,33 +78,30 @@ following list are items to still be completed
 
 3.  Fix the WSB2 (and others) flash between data and no data
 
-4.  Incorporate the temperature and pressure readings into the visual
+4.  Incorporate the temperature and pressure readings into the visual –
+    possibly their own color coded visuals
 
 5.  Create a better graphically designed layout
 
-6.  Add a boat that moves across the screen to signify locking time
+## Guthorm Maersk (Salinity)
 
-## Guthorm Maersk
+![Panama Lock Cross Section](man/figures/GUTHORM%20MAERSK_total_new.svg)
 
-The first visualization was ran only using data from lockage of the
-Guthorm Maersk ship. ![Panama Lock Cross
-Section](man/figures/GUTHORM%20MAERSK_total_new.svg)
-
-## Diamond Gas Rose
+## Diamond Gas Rose (Salinity)
 
 ![Panama Lock Cross
 Section](man/figures/DIAMOND%20GAS%20ROSE_total_new.svg)
 
-## CMA CGM Aquila
+## CMA CGM Aquila (Salinity)
 
 ![Panama Lock Cross
 Section](man/figures/CMA%20CGM%20AQUILA_total_new.svg)
 
-## Ever Lotus
+## Ever Lotus (Salinity)
 
 ![Panama Lock Cross Section](man/figures/EVER%20LOTUS_total_new.svg)
 
-## CMA CGM Nabucco
+## CMA CGM Nabucco (Salinity)
 
 ![Panama Lock Cross
 Section](man/figures/CMA%20CGM%20NABUCCO_total_new.svg)

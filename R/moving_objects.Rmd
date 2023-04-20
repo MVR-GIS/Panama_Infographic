@@ -1,0 +1,216 @@
+---
+title: "Moving Objects"
+author: "ryan.benac"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+How to create keyframe animations that move the boat
+
+Libraries
+```{R}
+library(minisvg)
+library(minicss)
+library(colorspace)
+```
+
+Function to get ids
+```{R}
+# function to pull out shape id from the svg
+get_ids <- function(SVG_name) {
+  draw_group <- SVG_name$children[[5]]$children
+  
+  # create empty list
+  df <- data.frame(matrix(ncol = 0, nrow = length(draw_group)))
+  df$id <- ""
+  
+  # iterate then append values
+  for (i in 1:length(draw_group)) {
+    df[i,1] <- draw_group[[i]]$attribs$id
+  }
+  
+  return(df)
+}
+```
+
+
+First, let's load the cross section layout containing the boat. We'll also get all the ids into a df
+```{r}
+svg_boat_anim <- minisvg::parse_svg_doc("C:/Workspace/GIT/Panama Infographic/man/figures/total_lock_cross_section.svg")
+
+df_svg_id <- get_ids(svg_boat_anim)
+
+minisvg::knit_print.SVGDocument(svg_boat_anim)
+```
+Create an animation from 1 to 100
+
+```{R}
+id <- 'boat'
+anim_length <- 100
+
+start <- 20
+end <- 350
+total <- end - start
+goBy <- total / anim_length
+
+# create keyname declarations
+  key_name = paste('anim_', id, sep="")
+  my_frame <- minicss::Keyframes$new(name = key_name)
+  
+  for (rowIndex in 1:anim_length) {
+    # translation math
+    trans_dist <- start + (rowIndex * goBy)
+    
+    # add to keyframe
+    my_frame$add(time = paste(rowIndex, "%",sep = ""), transform = paste('translate(', trans_dist, "px, 28px) scale(.04)",sep=""))
+  }
+  
+svg_boat_anim$add_css(as.character(my_frame))
+
+
+anim_dur <- 15                    # animation duration in seconds
+iter_count = 'infinite'
+dir = 'normal'
+# define the css animation
+new_css <- Style$new(paste("#", id, sep=""))
+# update with animation declaration
+new_css$update(css_prop$animation(name = key_name, duration = anim_dur, iteration_count = iter_count, direction = dir))
+# add that new css to the svg
+svg_boat_anim$add_css(as.character(new_css))
+```
+
+```{R}
+minisvg::knit_print.SVGDocument(svg_boat_anim)
+```
+Becuase of how the initial boat is scaled, the transform attempts to modify its pseudolocaiton, so we needed to rescale and offset for that.
+
+```{R}
+writeLines(as.character(svg_boat_anim), paste("C:/Workspace/GIT/Panama Infographic/man/figures/boat_test.svg", sep=""))
+```
+
+
+Now we need it to move as it coordinates with its actual location in the locking process
+```{R}
+# read in the df for further data understanding
+df_sgr <- read.table("C:\\Workspace\\GIT\\DATA\\Infographic\\df_sgr.csv")
+```
+
+Subset to get just 1 boat's data as a representative sample
+```{R}
+boat <- 'GUTHORM MAERSK'
+
+# subset to get only GUTHORM data
+single_boat <- df_sgr[df_sgr$VESSEL_NAME == boat,]
+```
+
+In looking at the df, it appears that temperature and pressure are unique to each instrument at each reading
+
+Next, we need to divise a way to know where the boat should be both based on the data and where that location is on the SVG
+```{R}
+locations <- data.frame(unique(single_boat$CURRENT_VESSEL_LOCATION))
+
+# x location of each lockage location estimated from inkscape. Could also theoretically be pulled off of a shape id
+locations$X_END <- c(20,77,117,161,201,243,360)
+locations
+```
+Let's see how that compares to the times by isolating 1 instument
+```{R}
+single_ins <- single_boat[single_boat$STATION_NAME == 'U-ACAT200-LK1' & single_boat$SALINITY_GAGE_NAME == 'A',]
+head(single_ins)
+```
+
+Easiest way to ensure that the boat moves equally in relation to the data set is to create a separate dataset to read through and animate based on. All instruments should have 2269 readings, so we can isolate unique readings and location from that instrument and do the x translation math based on that
+```{R}
+df_boat_move <- data.frame(unique(single_ins$READING_TIME))
+
+# rename column
+names(df_boat_move)[names(df_boat_move) == "unique.single_ins.READING_TIME."] <- "READING_TIME"
+
+# add location in lockage
+df_boat_move$CURRENT_VESSEL_LOCATION <- single_ins$CURRENT_VESSEL_LOCATION[single_ins$READING_TIME == df_boat_move$READING_TIME]
+
+# add same keyframe animations
+df_boat_move <- data.frame(df_boat_move[order(df_boat_move$READING_TIME),])
+row.names(df_boat_move) <- NULL
+df_boat_move$KEYFRAME_ID <- seq(from=1, to=100, length = nrow(df_boat_move))
+
+# read through and get x location
+df_boat_move$X_LOC <- ""
+
+# need to read through and assign different step values depending on where the boat is in the lock
+start <- 5
+indexStart <- 1
+
+for (locationIndex in 1:nrow(locations)) {
+  count <- length(df_boat_move$CURRENT_VESSEL_LOCATION[df_boat_move$CURRENT_VESSEL_LOCATION == locations$unique.single_boat.CURRENT_VESSEL_LOCATION.[locationIndex]])
+  current <- locations$unique.single_boat.CURRENT_VESSEL_LOCATION.[locationIndex]
+
+  indexEnd <- indexStart + count - 1
+  
+  # current end of X location
+  currentEnd <- locations$X_END[locationIndex]
+  
+  # assign group the sequence
+  df_boat_move$X_LOC[indexStart:indexEnd] <- seq(from=start, to=currentEnd, length = (indexEnd - indexStart + 1)) 
+  
+  indexStart <- indexEnd + 1
+  start <- currentEnd
+}
+
+```
+
+```{R}
+svg_boat_anim <- minisvg::parse_svg_doc("C:/Workspace/GIT/Panama Infographic/man/figures/total_lock_cross_section.svg")
+
+id <- 'boat'
+
+# create keyname declarations
+  key_name = paste('anim_', id, sep="")
+  my_frame <- minicss::Keyframes$new(name = key_name)
+  
+  for (rowIndex in 1:nrow(df_boat_move)) {
+    dist <- df_boat_move$X_LOC[rowIndex]
+    keyFrame <- df_boat_move$KEYFRAME_ID[rowIndex]
+    
+    # add to keyframe
+    my_frame$add(time = paste(keyFrame, "%",sep = ""), transform = paste('translate(', dist, "px, 28px) scale(.04)",sep=""))
+  }
+  
+svg_boat_anim$add_css(as.character(my_frame))
+
+
+anim_dur <- 60                    # animation duration in seconds
+iter_count = 'infinite'
+dir = 'normal'
+# define the css animation
+new_css <- Style$new(paste("#", id, sep=""))
+# update with animation declaration
+new_css$update(css_prop$animation(name = key_name, duration = anim_dur, iteration_count = iter_count, direction = dir))
+# add that new css to the svg
+svg_boat_anim$add_css(as.character(new_css))
+```
+
+```{R}
+minisvg::knit_print.SVGDocument(svg_boat_anim)
+```
+
+```{R}
+
+```
+
+```{R}
+
+```
+
+```{R}
+
+```
+
+```{R}
+
+```
+
+```{R}
+
+```
+
