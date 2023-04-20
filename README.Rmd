@@ -56,6 +56,8 @@ The visuals below are still under development and QA checks. The following list 
 
 5. Create a better graphically designed layout
 
+6. Incorporate dual lockages
+
 ## Guthorm Maersk (Salinity)
 ![Panama Lock Cross Section](man/figures/GUTHORM MAERSK_total_new.svg) 
 

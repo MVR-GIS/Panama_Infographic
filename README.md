@@ -83,6 +83,8 @@ following list are items to still be completed
 
 5.  Create a better graphically designed layout
 
+6.  Incorporate dual lockages
+
 ## Guthorm Maersk (Salinity)
 
 ![Panama Lock Cross Section](man/figures/GUTHORM%20MAERSK_total_new.svg)
