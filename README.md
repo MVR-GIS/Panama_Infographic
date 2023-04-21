@@ -71,19 +71,13 @@ concurrently. Each color represent a range of 1 salinity value, grouped
 The visuals below are still under development and QA checks. The
 following list are items to still be completed
 
-1.  QA confirmation that animations happen in the correct order
-
-2.  Animate the TIME block to show the time readings are they are
-    animated
-
-3.  Fix the WSB2 (and others) flash between data and no data
-
-4.  Incorporate the temperature and pressure readings into the visual –
+1.  Incorporate the temperature and pressure readings into the visual –
     possibly their own color coded visuals
 
-5.  Create a better graphically designed layout
+2.  Create a better graphically designed layout
 
-6.  Incorporate dual lockages
+3.  Correctly incorporate dual lockages. Currently, they are shown only
+    as a single moving boat
 
 ## Guthorm Maersk (Salinity)
 

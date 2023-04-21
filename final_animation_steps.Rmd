@@ -271,7 +271,12 @@ boats <- unique(df_sgr$VESSEL_NAME)
 anim_dur <- 60                     # animation duration in seconds
 iter_count = 'infinite'
 dir = 'normal'
-    
+
+no_data_color <- '#ffffff'
+
+#-----------------------------------------------------------------------------------------------------------------------------------#
+# Work through each boat
+
 for (boat in boats) {
   cat('Initiallizing Script')
   cat('\n\n')
@@ -334,6 +339,7 @@ for (boat in boats) {
   #rename column
   names(df_keyframe)[names(df_keyframe) == "df_keyframe.order.df_keyframe.unique.single_boat.READING_TIME...."] <- "READING_TIME"
   
+  # Work through each instrument
   for (insIndex in 1:length(instruments)) {
     instrument <- instruments[insIndex]
     
@@ -352,13 +358,14 @@ for (boat in boats) {
     key_name = paste('anim_', instrument, sep="")
     my_frame <- minicss::Keyframes$new(name = key_name)
     
+    # Work through each reading
     for (rowIndex in 1:nrow(df_keyframe)) {
       currentReading <- df_keyframe$READING_TIME[rowIndex]
       
       if (length(insReadings$READING_TIME[grepl(currentReading, insReadings$READING_TIME)]) == 1) {
         colorVal <- insReadings$COLOR[insReadings$READING_TIME == currentReading]
       } else {
-        colorVal <- '#000000'
+        colorVal <- no_data_color
       }
       
       my_frame$add(time = paste(df_keyframe$KEYFRAME_ID[rowIndex], "%",sep = ""), fill = colorVal)
