@@ -79,6 +79,13 @@ following list are items to still be completed
 3.  Correctly incorporate dual lockages. Currently, they are shown only
     as a single moving boat
 
+4.  Verify the LC2 & LC3 layout
+
+5.  Make more effective use of functions. Currently chunks are run in
+    for loops but could be more organized if utilizing functions for
+    tasks. It is not currently known if this would improve current
+    runtime to create all models
+
 ## Guthorm Maersk (Salinity)
 
 ![Panama Lock Cross Section](man/figures/GUTHORM%20MAERSK_total_new.svg)
